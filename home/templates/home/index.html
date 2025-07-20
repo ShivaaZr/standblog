@@ -70,11 +70,22 @@ https://templatemo.com/tm-551-stand-blog
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>
               </li>
+              
 
               <li class="nav-item">
+        
+
                 {% if request.user.is_authenticated %}
                 <div class="d-flex">
                   {% if request.user.firstname %}
+
+                        {% if request.user.profile.image %}
+                          <span><img src="{{ user.profile.image.url }}" alt=""
+                              width="20px" height="40px" style="border-radius: 5px;"></span>
+                        {% else %}
+                          <span><img src="{% static 'images/icons/images.png' %}" alt=""
+                             width="20px" height="40px" style="border-radius: 5px;"></span>
+                        {% endif %}
                     <a class="nav-link" href="">{{request.user.first_name}} {{request.user.last_name}}</a>
                   {% else %}
                     <a class="nav-link" href="">{{request.user.username}}</a>
@@ -106,7 +117,7 @@ https://templatemo.com/tm-551-stand-blog
           <div class="item-content">
             <div class="main-content">
               <div class="meta-category">
-                <span>Fashion</span>
+                <span>{{article.user.category.first.title}}</span>
               </div>
               <a href="post-details.html"><h4>{{article.title}}</h4></a>
               <ul class="post-info">
